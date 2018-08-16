@@ -1,5 +1,6 @@
 package com.test;
 
+import com.study.springmybatis.config.WebConfig;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
 import org.junit.runner.RunWith;
@@ -8,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration("classpath:spring-config.xml")
+@ContextConfiguration(classes = {WebConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class Test {
 
