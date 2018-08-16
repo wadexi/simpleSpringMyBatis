@@ -14,4 +14,8 @@
     <select id="getUser" parameterType="String" resultMap="userMap">
         select * from userinfo where id = #{id}
     </select>
+    
+    <insert id="insertUser" parameterType="User">
+        insert into userinfo(phone_num,user_name,pass_wd,user_img_path) value (#{phoneNum},#{userName},#{passWd},#{userImgPath})
+    </insert>
 </mapper>

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class IUserServiceIml implements IUserService {
 
     @Autowired
@@ -20,5 +20,10 @@ public class IUserServiceIml implements IUserService {
     @Override
     public User getUserById(String id) {
         return userDao.getUser(id);
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDao.insertUser(user);
     }
 }

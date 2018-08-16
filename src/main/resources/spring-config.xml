@@ -27,18 +27,15 @@
     </bean>
 
 
-    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="com.study.springmybatis.dao"/>
 
     </bean>
 
-<!--
     <bean id="userServiceIml" class="com.study.springmybatis.service.iml.IUserServiceIml">
-        <property name="UserDao" ref="userDaoDaoDao"/>
-    </bean>-->
-
-
+        <property name="UserDao" ref="userDao"/>
+    </bean>
 
 
 </beans>

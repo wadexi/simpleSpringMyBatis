@@ -5,4 +5,6 @@ import com.study.springmybatis.entity.User;
 public interface IUserService {
 
     User getUserById(String id);
+
+    void addUser(User user);
 }
