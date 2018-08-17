@@ -32,7 +32,7 @@
             用户名:<input type="text" name="userName"><br/>
             密码:<input type="password" name="passWd"><br/>
             确认密码:<input type="password" name="passWd2"><br/>
-            头像:<input type="file" name="userimgpath"><br/>
+            头像:<input type="file"  name="userimgpath"><br/>
             <input type="submit" value="注册">
         </form>
 

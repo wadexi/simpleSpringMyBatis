@@ -36,8 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(path = "/user/register")
-    public String doRegister(@RequestParam("userimgpath") CommonsMultipartFile file,Model model, HttpServletRequest request){
-        User user = new User();
+    public String doRegister(@RequestParam("userimgpath") CommonsMultipartFile file,User user,Model model, HttpServletRequest request){
         System.out.println(user.toString());
         List<String> errors = new ArrayList<>();
         String phoneNum = user.getPhoneNum();
@@ -69,7 +68,9 @@ public class UserController {
         if(!file.isEmpty()){
             String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
             String filenam = System.currentTimeMillis() + type;
+            path= request.getSession().getServletContext().getContextPath();
             path= request.getSession().getServletContext().getRealPath("/upload/" +filenam);
+
             File destFile = new File(path);
             try {
                 FileUtils.copyInputStreamToFile(file.getInputStream(),destFile);
