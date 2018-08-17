@@ -1,5 +1,7 @@
 package com.study.springmybatis.entity;
 
+
+
 public class User {
 
     private String id;

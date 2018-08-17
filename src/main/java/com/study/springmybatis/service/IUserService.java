@@ -6,5 +6,10 @@ public interface IUserService {
 
     User getUserById(String id);
 
+
+    User getUserByName(String userName);
+
     void addUser(User user);
+
+    User getUserByPhoneNum(String phoneNum);
 }
