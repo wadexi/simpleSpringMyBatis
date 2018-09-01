@@ -44,7 +44,7 @@
 <body bgcolor="#ffe4c4">
 
     <div class="right">
-        <a href="/page/register">注册</a>
+        <a href="/springbatis/page/register">注册</a>
     </div>
 
     <div class="right end ">

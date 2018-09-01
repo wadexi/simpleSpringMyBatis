@@ -17,14 +17,25 @@ public class Test {
 
     @org.junit.Test
     public void test(){
-        IUserServiceIml iUserServiceIml = applicationContext.getBean(IUserServiceIml.class);
-        User user = new User();
-        user.setPhoneNum("13162708688");
-        user.setUserName("alan");
-        user.setUserImgPath("http://www.baidu.com/logo.png");
-        user.setPassWd("123123123");
-        iUserServiceIml.addUser(user);
-        User user2 = iUserServiceIml.getUserById("2");
-        System.out.println(user2.toString());
+//        IUserServiceIml iUserServiceIml = applicationContext.getBean(IUserServiceIml.class);
+//        User user = new User();
+//        user.setPhoneNum("13162708688");
+//        user.setUserName("alan");
+//        user.setUserImgPath("http://www.baidu.com/logo.png");
+//        user.setPassWd("123123123");
+//        iUserServiceIml.addUser(user);
+//        User user2 = iUserServiceIml.getUserById("2");
+//        System.out.println(user2.toString());
+
+        StringBuffer relPath = new StringBuffer("/source/photos/");
+        String absolutePath = "1111";
+        saveFile(relPath,absolutePath);
+        System.out.println(relPath);
+        System.out.println(absolutePath);
+    }
+
+    public void saveFile(StringBuffer relPath,String absolutePath){
+        relPath.append("9999999");
+        absolutePath = absolutePath + "9999999";
     }
 }

@@ -12,11 +12,15 @@
 </head>
 <body>
 
-    标题:<input name="title" type="text"/><br/>
-    活动宣传图：<input name="xuanchuanimg" type="file"/><br/>
-    地点:<input type="text" name="location" ><br/>
-    时间:<input type="datetime-local" name="datatime" ><br/>
-    简介:<textarea name="introduce"></textarea><br/>
+    <form action="${pageContext.request.contextPath}/activity/create" method="post">
+        标题:<input name="title" type="title"/><br/>
+        活动宣传图：<input name="imgPath" type="file"/><br/>
+        地点:<input type="text" name="location" ><br/>
+        时间:<input type="datetime-local" name="date" ><br/>
+        简介:<textarea name="intro"></textarea><br/>
+        <input type="submit" value="创建">
+    </form>
+
 
 </body>
 </html>

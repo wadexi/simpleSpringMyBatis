@@ -27,7 +27,7 @@
     </c:forEach>
     <div>
 
-        <form  action="/user/register" method="post" enctype="multipart/form-data"><br/>
+        <form  action="/springbatis/user/register" method="post" enctype="multipart/form-data"><br/>
             手机号:<input type="text" name="phoneNum"><br/>
             用户名:<input type="text" name="userName"><br/>
             密码:<input type="password" name="passWd"><br/>

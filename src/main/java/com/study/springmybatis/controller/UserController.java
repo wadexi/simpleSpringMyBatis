@@ -1,5 +1,6 @@
 package com.study.springmybatis.controller;
 
+import com.study.springmybatis.entity.Activity;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
 import org.apache.commons.io.FileUtils;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,9 +33,60 @@ public class UserController {
         return "register";
     }
 
+
     @RequestMapping(path = "/page/createactivity")
-    public String showCreateActiviy(){
+    public String showCreateActiviy(Model model){
+
+
         return "createactivity";
+    }
+
+
+    @RequestMapping(path = "/activity/create")
+    public String createActiviy(@RequestParam("imgPath") CommonsMultipartFile file,Activity activity,Model model,HttpServletRequest request){
+        System.out.println(activity.toString());
+        List<String> errors = new ArrayList<>();
+        StringBuffer relPath = new StringBuffer("/source/photos/");
+        StringBuffer absolutePath = new StringBuffer(request.getSession().getServletContext().getRealPath(relPath.toString()));
+        String errorMsg = saveFile(file,relPath,absolutePath);
+
+        if(StringUtils.isNotBlank(errorMsg)){
+            errors.add(errorMsg);
+        }
+
+        if(!errors.isEmpty()){
+            return "createactivity";
+        }
+        activity.setDate(new Date());
+        activity.setImgPath(relPath.toString());
+        userServiceIml.createActivity(activity);
+        return "activitycreatesuccesed";
+    }
+
+    /**
+     * 保存文件
+     * @param file
+     */
+    private String saveFile(CommonsMultipartFile file,StringBuffer relPath,StringBuffer absolutePath) {
+        String errorMsg = "";
+        if(!file.isEmpty()){
+            String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+            String filename = System.currentTimeMillis() + type;
+            relPath.append(filename);
+            absolutePath.append(filename);
+
+
+            File destFile = new File(absolutePath.toString());
+            try {
+                FileUtils.copyInputStreamToFile(file.getInputStream(),destFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            errorMsg = "文件不可为空!";
+        }
+
+        return errorMsg;
     }
 
     @RequestMapping(path = "/user/register")
@@ -65,11 +119,13 @@ public class UserController {
             errors.add("密码不可为空!");
         }
         String path ="";
+        String relPath = "";
         if(!file.isEmpty()){
             String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
-            String filenam = System.currentTimeMillis() + type;
-            path= request.getSession().getServletContext().getContextPath();
-            path= request.getSession().getServletContext().getRealPath("/upload/" +filenam);
+            String filename = System.currentTimeMillis() + type;
+            relPath = "/source/photos/" + filename;
+            path= request.getSession().getServletContext().getRealPath("/source/photos/" +filename);
+
 
             File destFile = new File(path);
             try {
@@ -85,7 +141,7 @@ public class UserController {
             model.addAttribute("errors",errors);
             return "register";
         }
-        user.setUserImgPath(path);
+        user.setUserImgPath(relPath);
         userServiceIml.addUser(user);
         model.addAttribute("user",user);
 
@@ -93,24 +149,35 @@ public class UserController {
     }
 
     @RequestMapping(path = "/user/login")
-    public String doLogi(User user,Model model){
+    public String doLogi(User user,Model model,HttpServletRequest request){
         System.out.println(user.toString());
         User dbUser = userServiceIml.getUserByName(user.getUserName());
         if(dbUser != null){
             final String dbPassWd = dbUser.getPassWd();
             final String passWd = user.getPassWd();
             if(dbPassWd.equals(passWd)){
-                model.addAttribute("user",user);
+                request.getServletContext().setAttribute("user",dbUser);
+//                model.addAttribute("user",dbUser);
+                List<Activity> activities = userServiceIml.getAllActivities();
+                model.addAttribute("activities",activities);
+                System.out.println(activities.toString());
                 return "home";
             }
         }
         return "index";
     }
 
-    @RequestMapping({"/","/homepage"})
+    @RequestMapping({"/"})
     public String showLoginPage(){
         System.out.println("index page");
         return "index";
+    }
+
+    @RequestMapping("/homepage")
+    public String showHomePage(HttpSession session,HttpServletRequest request){
+        System.out.println("home page");
+//        session.getAttribute()
+        return "home";
     }
 
 

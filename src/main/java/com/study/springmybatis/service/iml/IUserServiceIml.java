@@ -1,12 +1,13 @@
 package com.study.springmybatis.service.iml;
 
 import com.study.springmybatis.dao.UserDao;
+import com.study.springmybatis.entity.Activity;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class IUserServiceIml implements IUserService {
@@ -36,5 +37,15 @@ public class IUserServiceIml implements IUserService {
     @Override
     public User getUserByPhoneNum(String phoneNum) {
         return userDao.getUserByPhoneNum(phoneNum);
+    }
+
+    @Override
+    public List<Activity> getAllActivities() {
+        return userDao.getAllActivities();
+    }
+
+    @Override
+    public void createActivity(Activity activity) {
+        userDao.createActivity(activity);
     }
 }

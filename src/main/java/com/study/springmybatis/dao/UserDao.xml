@@ -24,6 +24,27 @@
     </select>
     
     <insert id="insertUser" parameterType="User">
-        insert into userinfo(phone_num,user_name,pass_wd,user_img_path) value (#{phoneNum},#{userName},#{passWd},#{userImgPath})
+        insert into userinfo(phone_num,user_name,pass_wd,user_img_path) values (#{phoneNum},#{userName},#{passWd},#{userImgPath})
     </insert>
+
+    <resultMap id="activity" type="com.study.springmybatis.entity.Activity">
+        <id property="id" column="id"/>
+        <result column="title" property="title"/>
+        <result column="img" property="imgPath"/>
+        <result column="location" property="location"/>
+        <result column="time" property="date"/>
+        <result column="introduce" property="intro"/>
+        <result column="activitytype" property="acitityType"/>
+
+    </resultMap>
+
+    <select id="getAllActivities" resultType="activity">
+        select * from activities;
+    </select>
+
+    <insert id="createActivity" parameterType="Activity">
+        insert into activities(title, img, location, time, introduce, activitytype) VALUES (#{title},#{imgPath},#{location},#{date},#{intro},#{acitityType})
+    </insert>
+
+
 </mapper>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.study.springmybatis.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: 073105
   Date: 2018/8/16
@@ -30,10 +30,46 @@
             float: right;
         }
 
+        .top{
+            width: 100%;
+            background-color: aliceblue;
+            float: top;
+        }
+
+        .circle{
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+        }
+
+        div{
+            text-align: left;
+        }
+
+        .in{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body>
+
+    <%!
+        String imgPath2 = "";
+    %>
+    <%
+        User user = (User) request.getServletContext().getAttribute("user");
+        imgPath2 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + user.getUserImgPath();
+        System.out.println(imgPath2);
+    %>
+
     <%----%>
+    <div class="top">
+        <img class="circle" src="<%=imgPath2%>"  >
+        <span class="in">${user.userName}</span>
+    </div>
+
     <div class="right">
 
         <span class="form-select-button">
@@ -62,12 +98,26 @@
                 <option value="readbook4">读书会4</option>
             </select>
         </span>
+        <br>
+
+        <c:forEach items='<%= request.getAttribute("activities")%>' var="item">
+
+            <div style="background-image: ${item.imgPath};background-size: contain" >
+                <h3>${item.title}</h3>
+                时间:${item.date}<<br>>
+                地点:${item.location}
+                简介:${item.intro}
+            </div>
+        </c:forEach>
 
     </div>
 
+
+
+
     <%--left--%>
     <div class="left">
-        <a href="/page/createactivity">创建活动</a>
+        <a href="/springbatis/page/createactivity">创建活动</a>
     </div>
 
 
