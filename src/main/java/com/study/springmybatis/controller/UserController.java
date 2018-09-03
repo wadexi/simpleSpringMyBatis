@@ -1,5 +1,6 @@
 package com.study.springmybatis.controller;
 
+import com.study.springmybatis.bean.ActivityType;
 import com.study.springmybatis.entity.Activity;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
@@ -43,7 +44,7 @@ public class UserController {
 
 
     @RequestMapping(path = "/activity/create")
-    public String createActiviy(@RequestParam("imgPath") CommonsMultipartFile file,Activity activity,Model model,HttpServletRequest request){
+    public String createActiviy(@RequestParam("imgpath") CommonsMultipartFile file,Activity activity,Model model,HttpServletRequest request){
         System.out.println(activity.toString());
         List<String> errors = new ArrayList<>();
         StringBuffer relPath = new StringBuffer("/source/photos/");
@@ -57,8 +58,8 @@ public class UserController {
         if(!errors.isEmpty()){
             return "createactivity";
         }
-        activity.setDate(new Date());
         activity.setImgPath(relPath.toString());
+        activity.setAcitityType(ActivityType.BOOK.name());
         userServiceIml.createActivity(activity);
         return "activitycreatesuccesed";
     }

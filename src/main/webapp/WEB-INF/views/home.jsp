@@ -1,4 +1,6 @@
-<%@ page import="com.study.springmybatis.entity.User" %><%--
+<%@ page import="com.study.springmybatis.entity.User" %>
+<%@ page import="com.study.springmybatis.entity.Activity" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 073105
   Date: 2018/8/16
@@ -62,6 +64,8 @@
         User user = (User) request.getServletContext().getAttribute("user");
         imgPath2 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + user.getUserImgPath();
         System.out.println(imgPath2);
+        List<Activity> activities = (List<Activity>) request.getAttribute("activities");
+        System.out.println(activities.toString());
     %>
 
     <%----%>
@@ -103,10 +107,11 @@
         <c:forEach items='<%= request.getAttribute("activities")%>' var="item">
 
             <div style="background-image: ${item.imgPath};background-size: contain" >
+                <img src="${item.imgPath}">
                 <h3>${item.title}</h3>
-                时间:${item.date}<<br>>
-                地点:${item.location}
-                简介:${item.intro}
+                时间:${item.date}<br>
+                地点:${item.location}<br>
+                简介:${item.intro}<br>
             </div>
         </c:forEach>
 

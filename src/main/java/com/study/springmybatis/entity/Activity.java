@@ -9,7 +9,7 @@ public class Activity {
     private String title;
     private String imgPath;
     private String location;
-    private Date date;
+    private String date;
     private String intro;
     private String acitityType;
 
@@ -46,11 +46,11 @@ public class Activity {
         this.location = location;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

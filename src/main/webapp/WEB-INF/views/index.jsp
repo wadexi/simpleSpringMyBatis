@@ -16,6 +16,7 @@
             line-height: 150%;
             background-color: beige;
         }
+
         .right{
             text-align: right;
             margin-right: 10%;

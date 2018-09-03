@@ -1,5 +1,6 @@
 package com.test;
 
+import com.study.springmybatis.dao.UserDao;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
 import org.junit.runner.RunWith;
@@ -27,11 +28,18 @@ public class Test {
 //        User user2 = iUserServiceIml.getUserById("2");
 //        System.out.println(user2.toString());
 
-        StringBuffer relPath = new StringBuffer("/source/photos/");
-        String absolutePath = "1111";
-        saveFile(relPath,absolutePath);
-        System.out.println(relPath);
-        System.out.println(absolutePath);
+//        StringBuffer relPath = new StringBuffer("/source/photos/");
+//        String absolutePath = "1111";
+//        saveFile(relPath,absolutePath);
+//        System.out.println(relPath);
+//        System.out.println(absolutePath);
+
+
+//        User student = new User();
+//        UserDao studentDao = org.springframework.mock.web.MockServletContext.mock(UserDao.class);
+//        studentDao.add(student);
+//        verify(studentDao).add(student);
+
     }
 
     public void saveFile(StringBuffer relPath,String absolutePath){

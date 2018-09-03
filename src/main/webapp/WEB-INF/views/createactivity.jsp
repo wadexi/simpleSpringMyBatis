@@ -12,11 +12,11 @@
 </head>
 <body>
 
-    <form action="${pageContext.request.contextPath}/activity/create" method="post">
+    <form action="${pageContext.request.contextPath}/activity/create" method="post" enctype="multipart/form-data">
         标题:<input name="title" type="title"/><br/>
-        活动宣传图：<input name="imgPath" type="file"/><br/>
+        活动宣传图：<input type="file" name="imgpath" /><br/>
         地点:<input type="text" name="location" ><br/>
-        时间:<input type="datetime-local" name="date" ><br/>
+        时间:<input type="text" name="date" ><br/>
         简介:<textarea name="intro"></textarea><br/>
         <input type="submit" value="创建">
     </form>
