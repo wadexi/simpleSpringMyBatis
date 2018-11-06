@@ -1,6 +1,7 @@
 package com.study.springmybatis.entity;
 
 
+import javax.management.remote.rmi.RMIServer;
 import java.util.Date;
 
 public class Activity {

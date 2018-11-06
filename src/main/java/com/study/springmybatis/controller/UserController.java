@@ -48,6 +48,7 @@ public class UserController {
         System.out.println(activity.toString());
         List<String> errors = new ArrayList<>();
         StringBuffer relPath = new StringBuffer("/source/photos/");
+
         StringBuffer absolutePath = new StringBuffer(request.getSession().getServletContext().getRealPath(relPath.toString()));
         String errorMsg = saveFile(file,relPath,absolutePath);
 
@@ -126,7 +127,8 @@ public class UserController {
             String filename = System.currentTimeMillis() + type;
             relPath = "/source/photos/" + filename;
             path= request.getSession().getServletContext().getRealPath("/source/photos/" +filename);
-
+//            path= request.getSession().getServletContext().getRealPath("/source/photos/" +filename);
+//            ip+port+contextpath+/source/photos/+filename
 
             File destFile = new File(path);
             try {

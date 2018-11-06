@@ -13,7 +13,7 @@
 <body>
 
     <%
-        response.setHeader("refresh","3;URL=/springbatis/homepage");
+        response.setHeader("refresh","3;URL=/activity/homepage");
 
     %>
     <h1 style="color: green">活动创建成功</h1>

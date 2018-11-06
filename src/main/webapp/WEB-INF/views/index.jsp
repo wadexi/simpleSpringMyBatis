@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.logging.Logger" %><%--
   Created by IntelliJ IDEA.
   User: 073105
   Date: 2018/8/16
@@ -24,8 +24,8 @@
 
 
         .end{
-            margin-top: 30%;
-
+            margin-top: 30%
+        ;
         }
 
         .width8{
@@ -44,8 +44,12 @@
 </head>
 <body bgcolor="#ffe4c4">
 
+    <%
+        System.out.println("test jsp log");
+    %>
+
     <div class="right">
-        <a href="/springbatis/page/register">注册</a>
+        <a href="${pageContext.request.contextPath}/page/register">注册</a>
     </div>
 
     <div class="right end ">

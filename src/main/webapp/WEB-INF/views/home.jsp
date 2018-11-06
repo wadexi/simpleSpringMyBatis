@@ -62,10 +62,10 @@
     %>
     <%
         User user = (User) request.getServletContext().getAttribute("user");
-        imgPath2 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + user.getUserImgPath();
+        imgPath2 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getContextPath() +  user.getUserImgPath();
         System.out.println(imgPath2);
         List<Activity> activities = (List<Activity>) request.getAttribute("activities");
-        System.out.println(activities.toString());
+        System.out.println(activities == null? "" : activities.toString());
     %>
 
     <%----%>
@@ -122,7 +122,7 @@
 
     <%--left--%>
     <div class="left">
-        <a href="/springbatis/page/createactivity">创建活动</a>
+        <a href="${pageContext.request.contextPath}/page/createactivity">创建活动</a>
     </div>
 
 
