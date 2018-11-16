@@ -1,7 +1,6 @@
 package com.study.springmybatis.entity;
 
 
-import javax.management.remote.rmi.RMIServer;
 import java.util.Date;
 
 public class Activity {
@@ -10,7 +9,7 @@ public class Activity {
     private String title;
     private String imgPath;
     private String location;
-    private String date;
+    private Date date;
     private String intro;
     private String acitityType;
 
@@ -47,11 +46,11 @@ public class Activity {
         this.location = location;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

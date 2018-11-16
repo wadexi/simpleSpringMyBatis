@@ -12,7 +12,7 @@
         <result property="userImgPath" column="user_img_path" />
     </resultMap>
     <select id="getUser" parameterType="String" resultMap="userMap">
-        select * from userinfo where id = #{id}
+        select id,phone_num,user_name,pass_wd,user_img_path from userinfo where id = #{id}
     </select>
 
     <select id="getUserByPhoneNum" parameterType="String" resultMap="userMap">
@@ -28,19 +28,19 @@
         values (#{phoneNum},#{userName},#{passWd},#{userImgPath})
     </insert>
 
-    <resultMap id="activity" type="com.study.springmybatis.entity.Activity">
-        <id property="id"  column="id"/>
-        <result column="title" property="title"/>
-        <result column="img" property="imgPath"/>
-        <result column="location" property="location"/>
-        <result column="time" property="date"/>
-        <result column="introduce" property="intro"/>
-        <result column="activitytype" property="acitityType"/>
+    <resultMap id="activityMap" type="com.study.springmybatis.entity.Activity">
+        <id property="id"  column="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img" property="imgPath" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="time" property="date" jdbcType="TIMESTAMP"/>
+        <result column="introduce" property="intro" jdbcType="VARCHAR"/>
+        <result column="activitytype" property="acitityType" jdbcType="VARCHAR"/>
 
     </resultMap>
 
-    <select id="getAllActivities" resultType="activity">
-        select * from activities
+    <select id="getAllActivities" resultMap="activityMap">
+        select id,title,img,location,time,introduce,activitytype from activities
     </select>
 
     <!--insert 标签里不能有注释-->

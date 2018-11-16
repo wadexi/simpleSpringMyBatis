@@ -10,7 +10,7 @@
 
     <typeAliases>
         <typeAlias type="com.study.springmybatis.entity.User" alias="User"/>
-        <typeAlias type="com.study.springmybatis.entity.Activity" alias="Activity"/>
+       <!-- <typeAlias type="com.study.springmybatis.entity.Activity" alias="Activity"/>-->
     </typeAliases>
 
     <mappers>

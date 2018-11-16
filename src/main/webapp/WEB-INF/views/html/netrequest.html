@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习网络请求</title>
+
+    <script src="jquery3.3.1/jquery3.3.1.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.get("/testjqueryajax",function (data,status) {
+                    alert("数据：" + data + "\n状态：" + status)
+                })
+            })
+        })
+
+    </script>
+
+</head>
+<body>
+
+    <button>请求网络</button>
+
+</body>
+</html>

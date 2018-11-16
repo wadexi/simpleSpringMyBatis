@@ -1,18 +1,7 @@
-<%@ page import="com.study.springmybatis.entity.User" %>
-<%@ page import="com.study.springmybatis.entity.Activity" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: 073105
-  Date: 2018/8/16
-  Time: 17:24
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>主页</title>
+    <meta charset="UTF-8">
     <style type="text/css">
 
         .body{
@@ -36,6 +25,7 @@
             width: 100%;
             background-color: aliceblue;
             float: top;
+            vertical-align:middle;
         }
 
         .circle{
@@ -54,24 +44,47 @@
         }
 
     </style>
+
+    <script src="../js/jquery3.3.1/jquery3.3.1.js"></script>
+
+    <script>
+
+
+        /*获取用户信息*/
+        var url = "/user/info";
+        $.post(url,"",function (data, status) {
+            console.log("status:" + status + "   data: " + typeof  data)
+            if(status === "success"){
+                if(data !== null){
+                    $("#userpath").attr("src",data.userImgPath);
+                    var username = data.userName;
+                    console.log("username:" + username);
+                    $("#username").html(data.userName);
+                    // document.getElementById('username').innerHTML = "123";
+                }
+            }
+        },"json");
+
+        $.get("/activities/all","",function (data,status) {
+            if(status === "success"){
+                if(data !== null){
+                    data.forEach(function () {
+                        
+                    })
+                    // console.log(JSON.stringify(data));
+                }
+            }
+        });
+
+
+    </script>
 </head>
 <body>
 
-    <%!
-        String imgPath2 = "";
-    %>
-    <%
-        User user = (User) request.getServletContext().getAttribute("user");
-        imgPath2 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getContextPath() +  user.getUserImgPath();
-        System.out.println(imgPath2);
-        List<Activity> activities = (List<Activity>) request.getAttribute("activities");
-        System.out.println(activities == null? "" : activities.toString());
-    %>
 
-    <%----%>
     <div class="top">
-        <img class="circle" src="<%=imgPath2%>"  >
-        <span class="in">${user.userName}</span>
+        <img id="userpath" class="circle"  >
+        <label id="username"></label>
     </div>
 
     <div class="right">
@@ -104,25 +117,14 @@
         </span>
         <br>
 
-        <c:forEach items='<%= request.getAttribute("activities")%>' var="item">
-
-            <div style="background-image: ${item.imgPath};background-size: contain" >
-                <img src="${item.imgPath}">
-                <h3>${item.title}</h3>
-                时间:${item.date}<br>
-                地点:${item.location}<br>
-                简介:${item.intro}<br>
-            </div>
-        </c:forEach>
 
     </div>
 
 
 
 
-    <%--left--%>
     <div class="left">
-        <a href="${pageContext.request.contextPath}/page/createactivity">创建活动</a>
+        <a href="/page/createactivity">创建活动</a>
     </div>
 
 
