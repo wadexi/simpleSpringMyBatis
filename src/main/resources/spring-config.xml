@@ -20,9 +20,10 @@
 
 
 
-    <mvc:resources location="/WEB-INF/views/images/" mapping="/images/**" />
-    <mvc:resources location="/WEB-INF/views/html/" mapping="/html/**" />
-    <mvc:resources location="/WEB-INF/views/js/" mapping="/js/**" />
+    <mvc:resources location="/WEB-INF/views/images/" mapping="images/**" />
+    <mvc:resources location="/WEB-INF/views/html/" mapping="html/**" />
+    <mvc:resources location="/WEB-INF/views/js/" mapping="js/**" />
+    <mvc:resources location="/WEB-INF/views/css/" mapping="css/**" />
     <!--<mvc:resources location="/WEB-INF/views/images/" mapping="/**" />-->
    <!-- <mvc:resources location="/WEB-INF/views/html/" mapping="/images/**" />
     <mvc:resources location="/WEB-INF/views/images/" mapping="/images/**" />-->
@@ -32,7 +33,9 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/homepage"/>
+            <mvc:mapping path="/xxxxx"/>
+            <mvc:mapping path="/activity/create"/>
+            <mvc:mapping path="/page/createactivity"/>
             <bean class="com.study.springmybatis.interceptor.AuthorizedInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

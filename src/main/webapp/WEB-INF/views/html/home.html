@@ -2,56 +2,13 @@
 <head>
     <title>主页</title>
     <meta charset="UTF-8">
-    <style type="text/css">
-
-        .body{
-            margin: 0;
-            padding: 0;
-        }
-
-        .left{
-            width: 20%;
-            background-color: bisque;
-            float: left;
-        }
-
-        .right{
-            width: 75%;
-            background-color: aliceblue;
-            float: right;
-        }
-
-        .top{
-            width: 100%;
-            background-color: aliceblue;
-            float: top;
-            vertical-align:middle;
-        }
-
-        .circle{
-            width: 40px;
-            height: 40px;
-            border-radius: 40px;
-        }
-
-        div{
-            text-align: left;
-        }
-
-        .in{
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="../css/homepage.css"/>
     <script src="../js/jquery3.3.1/jquery3.3.1.js"></script>
-
+    <script src="../js/imgutils.js"></script>
     <script>
 
-
         /*获取用户信息*/
-        var url = "/user/info";
+        var url = "/activity/user/info";
         $.post(url,"",function (data, status) {
             console.log("status:" + status + "   data: " + typeof  data)
             if(status === "success"){
@@ -65,16 +22,61 @@
             }
         },"json");
 
-        $.get("/activities/all","",function (data,status) {
+        $.get("/activity/activities/all","",function (data,status) {
             if(status === "success"){
                 if(data !== null){
-                    data.forEach(function () {
-                        
-                    })
+                    data.forEach(function (item,index) {
+                        var title =item.title;
+                        var imgPath =item.imgPath;
+                        var location =item.location;
+                        var date =getYMDHMS(item.date);
+                        var intro =item.intro;
+                        var acitityType =item.acitityType;
+                        // console.log("data.size():" + data.size());
+                        console.log("data.length:" + data.length);
+
+                        // for (var i = 0; i < data.length;i++){
+
+                            /*item 容器*/
+                            var content = $("<div></div>");
+                            content.addClass("divitem");
+                            // content.attr("backgroud-img",imgPath);
+                            content.css("background-image","url(" + imgPath +")" );
+                            content.css("height","400px");
+                            // content.attr("background-image","url(" + imgPath +")" );
+
+                            /*标题*/
+                            var titleElement = $("<h3 class='center'>" + title + "</h3>");
+                            titleElement.appendTo(content);
+
+                            var locationEle = $("<label class='center'>" + location + "</label><br/>");
+                            locationEle.appendTo(content);
+
+                            var dateEle = $("<label class='center'>" + date + "</label><br/>");
+                            dateEle.appendTo(content);
+
+                            var introEle = $("<label class='center'>" + intro + "</label><br/>");
+                            introEle.appendTo(content);
+
+
+                            $("#activities").append(content);
+                        // }
+
+                    });
                     // console.log(JSON.stringify(data));
                 }
             }
         });
+
+        function getYMDHMS(time){
+
+            var myDate = new Date(time);
+            var YMD=myDate.getFullYear() + "-" + (myDate.getMonth()+1) + "-" + myDate.getDate();
+            var HMS=myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds();
+            var YMDHMS=YMD+" "+HMS;
+            return     YMDHMS;
+        }
+
 
 
     </script>
@@ -87,7 +89,7 @@
         <label id="username"></label>
     </div>
 
-    <div class="right">
+    <div id="activities" class="right">
 
         <span class="form-select-button">
             <select name="datalimit">
@@ -118,13 +120,15 @@
         <br>
 
 
+
+
     </div>
 
 
 
 
     <div class="left">
-        <a href="/page/createactivity">创建活动</a>
+        <a href="page/createactivity">创建活动</a>
     </div>
 
 

@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.left{
+    width: 20%;
+    background-color: bisque;
+    float: left;
+}
+
+.right{
+    width: 75%;
+    background-color: aliceblue;
+    float: right;
+}
+
+.top{
+    width: 100%;
+    background-color: aliceblue;
+    float: top;
+    vertical-align:middle;
+}
+
+.circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+
+div{
+    text-align: left;
+}
+
+.in{
+    display: inline-block;
+    vertical-align: middle;
+}
+.divitem{
+    /*background: url("../images/baxianhua.jpg") no-repeat center center;*/
+    width: 800px;
+    height: 600px;
+    margin: 20px;
+    padding: 20px;
+    background-repeat: no-repeat;
+    align-content: center;
+    overflow: hidden;
+    background-size: cover;
+    text-align:center;
+}
+
+.center{
+    text-align: center;
+}
+

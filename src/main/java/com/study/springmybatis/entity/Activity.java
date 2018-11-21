@@ -1,6 +1,8 @@
 package com.study.springmybatis.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Activity {
@@ -9,7 +11,8 @@ public class Activity {
     private String title;
     private String imgPath;
     private String location;
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date   date;
     private String intro;
     private String acitityType;
 

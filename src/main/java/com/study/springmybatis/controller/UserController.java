@@ -1,7 +1,6 @@
 package com.study.springmybatis.controller;
 
 import com.study.springmybatis.bean.ActivityType;
-import com.study.springmybatis.dao.UserDao;
 import com.study.springmybatis.entity.Activity;
 import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
@@ -54,12 +53,11 @@ public class UserController {
      * 创建活动跳转到活动创建成功界面
      * @param file
      * @param activity
-     * @param model
      * @param request
      * @return
      */
     @RequestMapping(path = "/activity/create")
-    public String createActiviy(@RequestParam("imgpath") CommonsMultipartFile file,Activity activity,Model model,HttpServletRequest request){
+    public String createActiviy(@RequestParam("imgpath") CommonsMultipartFile file,Activity activity,HttpServletRequest request,HttpServletResponse response){
         System.out.println(activity.toString());
         List<String> errors = new ArrayList<>();
         StringBuffer relPath = new StringBuffer("/source/photos/");
@@ -77,6 +75,7 @@ public class UserController {
         activity.setImgPath(relPath.toString());
         activity.setAcitityType(ActivityType.BOOK.name());
         userServiceIml.createActivity(activity);
+        response.addHeader("refresh","3;URL=/homepage");
         return "activitycreatesuccesed";
     }
 
@@ -198,21 +197,21 @@ public class UserController {
                     if(session.getAttribute("password").equals(realPassWd)){
                         return "home";
                     }else{
-                        return "forward:/index";
+                        return "forward:/";
                     }
                 }catch (Exception ex){
-                    return "forward:/index";
+                    return "forward:/";
                 }
             }
         }
 
-        return "forward:/index";
+        return "forward:/";
     }
 
     /**
      * 通过账户名密码登录
      * */
-    @RequestMapping(path = "/user/login",method = {RequestMethod.POST})
+    @RequestMapping(path = "/action/login",method = {RequestMethod.POST})
     public String doLogi(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         System.out.println(user.toString());
         User dbUser = userServiceIml.getUserByName(user.getUserName());
@@ -256,7 +255,7 @@ public class UserController {
                 return "home";
             }
         }
-        return "index";
+        return "register";
     }
 
 
@@ -280,10 +279,10 @@ public class UserController {
     /**
      * 跳转到登录界面
      * */
-    @RequestMapping({"/"})
+    @RequestMapping({"/login"})
     public String showLoginPage(){
         System.out.println("index page");
-        return "index";
+        return "register";
     }
 
     /**
@@ -292,7 +291,7 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/homepage")
+    @RequestMapping(path = {"/homepage","/"})
     public String showHomePage(HttpSession session,HttpServletRequest request){
         System.out.println("home page");
 //        session.getAttribute()
@@ -338,7 +337,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(path = "/activities/all",method = RequestMethod.GET)
+    @RequestMapping(path = "/activity/activities/all",method = RequestMethod.GET)
     public List<Activity> getActivities(HttpServletRequest request){
         List<Activity> activities =  userServiceIml.getAllActivities();
         System.out.println("活动信息："  + activities.toString());

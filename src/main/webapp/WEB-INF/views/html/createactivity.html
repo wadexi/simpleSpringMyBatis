@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建活动</title>
+    <script src="../js/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body style="background-color: blanchedalmond">
+
+    <form action="/activity/create" method="post" enctype="multipart/form-data">
+        标题:<input name="title" type="text"/><br/>
+        活动宣传图：<input type="file" name="imgpath" /><br/>
+        地点:<input type="text" name="location" ><br/>
+        时间:<input type="text" name="date" id="datetext" placeholder="请选择时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+        <br/>
+        简介:<textarea name="intro"></textarea><br/>
+        <input type="submit" value="创建">
+    </form>
+</body>
+</html>

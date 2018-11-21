@@ -23,13 +23,13 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         //先从session拿取用户
         Cookie[] cookies = request.getCookies();
         if(cookies==null){
-            response.sendRedirect("/");
+            response.sendRedirect("/activity/login");
             return false;
         }
         HttpSession session = request.getSession(false);
 
         if(session == null){
-            response.sendRedirect("/");
+            response.sendRedirect("/activity/login");
             return false;
         }
         String sessionId = session.getId();
@@ -37,7 +37,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         for(Cookie cookie:cookies){
             if (cookie.getName().equals("JSESSIONID")) {
                 if(!cookie.getValue().equals(sessionId)){
-                    response.sendRedirect("/");
+                    response.sendRedirect("/activity/login");
                     return false;
                 }
             }
@@ -51,19 +51,20 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
                     String password = (String) session.getAttribute("password");
                     if (password.equals(realPassword)){
 //                        response.sendRedirect("/homepage");
-//                        return true;
+                        return true;
                     }else{
-                        response.sendRedirect("/");
+                        response.sendRedirect("/activity/login");
                         return false;
                     }
                 }catch (NullPointerException e){
-                    response.sendRedirect("/");
+                    response.sendRedirect("/activity/login");
                     return false;
                 }
 
             }
         }
-        return true;
+        response.sendRedirect("/activity/login");
+        return false;
     }
 
     /*调用完成还没渲染视图的时候调用*/
