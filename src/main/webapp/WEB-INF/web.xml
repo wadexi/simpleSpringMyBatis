@@ -29,6 +29,10 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>com.study.springmybatis.listener.ServerStartupListener </listener-class>
+    </listener>
+
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -53,6 +57,6 @@
 
 
     <welcome-file-list>
-        <welcome-file>/</welcome-file>
+        <welcome-file>/homepage</welcome-file>
     </welcome-file-list>
 </web-app>

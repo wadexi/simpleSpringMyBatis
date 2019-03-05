@@ -34,7 +34,7 @@ public class UserController {
      */
     @RequestMapping(path = "/page/register")
     public String showRegister(){
-        return "register";
+        return "login";
     }
 
 
@@ -160,7 +160,7 @@ public class UserController {
 
         if(!errors.isEmpty()){
             model.addAttribute("errors",errors);
-            return "register";
+            return "login";
         }
         user.setUserImgPath(relPath);
         userServiceIml.addUser(user);
@@ -211,7 +211,7 @@ public class UserController {
     /**
      * 通过账户名密码登录
      * */
-    @RequestMapping(path = "/action/login",method = {RequestMethod.POST})
+    @RequestMapping(path = "/action/login",method = {RequestMethod.POST,RequestMethod.GET})
     public String doLogi(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         System.out.println(user.toString());
         User dbUser = userServiceIml.getUserByName(user.getUserName());
@@ -219,6 +219,7 @@ public class UserController {
             final String dbPassWd = dbUser.getPassWd();
             final String passWd = user.getPassWd();
             if(dbPassWd.equals(passWd)){
+
 
                 /*关联这个请求的session*/
                 HttpSession session = request.getSession();
@@ -255,7 +256,7 @@ public class UserController {
                 return "home";
             }
         }
-        return "register";
+        return "login";
     }
 
 
@@ -282,7 +283,7 @@ public class UserController {
     @RequestMapping({"/login"})
     public String showLoginPage(){
         System.out.println("index page");
-        return "register";
+        return "login";
     }
 
     /**
@@ -337,7 +338,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(path = "/activity/activities/all",method = RequestMethod.GET)
+    @RequestMapping(path = "/activities/all",method = RequestMethod.GET)
     public List<Activity> getActivities(HttpServletRequest request){
         List<Activity> activities =  userServiceIml.getAllActivities();
         System.out.println("活动信息："  + activities.toString());

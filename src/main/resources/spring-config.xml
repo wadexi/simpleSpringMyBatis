@@ -20,10 +20,10 @@
 
 
 
-    <mvc:resources location="/WEB-INF/views/images/" mapping="images/**" />
-    <mvc:resources location="/WEB-INF/views/html/" mapping="html/**" />
-    <mvc:resources location="/WEB-INF/views/js/" mapping="js/**" />
-    <mvc:resources location="/WEB-INF/views/css/" mapping="css/**" />
+    <mvc:resources location="/WEB-INF/views/images/" mapping="/images/**" />
+    <mvc:resources location="/WEB-INF/views/html/" mapping="/html/**" />
+    <mvc:resources location="/WEB-INF/views/js/" mapping="/js/**" />
+    <mvc:resources location="/WEB-INF/views/css/" mapping="/css/**" />
     <!--<mvc:resources location="/WEB-INF/views/images/" mapping="/**" />-->
    <!-- <mvc:resources location="/WEB-INF/views/html/" mapping="/images/**" />
     <mvc:resources location="/WEB-INF/views/images/" mapping="/images/**" />-->
@@ -39,6 +39,12 @@
             <bean class="com.study.springmybatis.interceptor.AuthorizedInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+
+
+
+
+
 
     <!--设置数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">

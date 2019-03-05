@@ -7,8 +7,24 @@
     <script src="../js/imgutils.js"></script>
     <script>
 
+        function getBaseUrl() {
+            var hostname = location.hostname;
+            var pathname = location.pathname;
+            var contextPath = pathname.split("/")[1];
+            var port = location.port;
+            var protocol = location.protocol;
+            return protocol + "//" + hostname + ":" + port + "/" + contextPath;
+        }
+
+        function getContextPath(){
+            var pathName = document.location.pathname;
+            var index = pathName.substr(1).indexOf("/");
+            var result = pathName.substr(0,index+1);
+            return result;
+        }
+
         /*获取用户信息*/
-        var url = "/activity/user/info";
+        var url = "/user/info";
         $.post(url,"",function (data, status) {
             console.log("status:" + status + "   data: " + typeof  data)
             if(status === "success"){
@@ -22,7 +38,7 @@
             }
         },"json");
 
-        $.get("/activity/activities/all","",function (data,status) {
+        $.get("/activities/all","",function (data,status) {
             if(status === "success"){
                 if(data !== null){
                     data.forEach(function (item,index) {
@@ -128,7 +144,7 @@
 
 
     <div class="left">
-        <a href="page/createactivity">创建活动</a>
+        <a href="/page/createactivity">创建活动</a>
     </div>
 
 

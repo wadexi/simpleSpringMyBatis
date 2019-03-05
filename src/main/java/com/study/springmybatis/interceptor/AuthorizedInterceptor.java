@@ -1,6 +1,5 @@
 package com.study.springmybatis.interceptor;
 
-import com.study.springmybatis.entity.User;
 import com.study.springmybatis.service.iml.IUserServiceIml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,13 +22,13 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         //先从session拿取用户
         Cookie[] cookies = request.getCookies();
         if(cookies==null){
-            response.sendRedirect("/activity/login");
+            response.sendRedirect("/login");
             return false;
         }
         HttpSession session = request.getSession(false);
 
         if(session == null){
-            response.sendRedirect("/activity/login");
+            response.sendRedirect("/login");
             return false;
         }
         String sessionId = session.getId();
@@ -37,7 +36,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         for(Cookie cookie:cookies){
             if (cookie.getName().equals("JSESSIONID")) {
                 if(!cookie.getValue().equals(sessionId)){
-                    response.sendRedirect("/activity/login");
+                    response.sendRedirect("/login");
                     return false;
                 }
             }
@@ -53,17 +52,17 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
 //                        response.sendRedirect("/homepage");
                         return true;
                     }else{
-                        response.sendRedirect("/activity/login");
+                        response.sendRedirect("/login");
                         return false;
                     }
                 }catch (NullPointerException e){
-                    response.sendRedirect("/activity/login");
+                    response.sendRedirect("/login");
                     return false;
                 }
 
             }
         }
-        response.sendRedirect("/activity/login");
+        response.sendRedirect("/login");
         return false;
     }
 
